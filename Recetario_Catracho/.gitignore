@@ -1,0 +1,91 @@
+
+############################################
+# RECETARIO CATRACHO
+# Android Studio + Java + ASP.NET Core + SQL
+############################################
+
+# ==========================================
+# ANDROID STUDIO / GRADLE
+# ==========================================
+
+**/.gradle/
+**/build/
+**/.idea/
+**/*.iml
+**/local.properties
+**/.externalNativeBuild/
+**/.cxx/
+**/captures/
+**/output-metadata.json
+
+# APK y AAB generados
+*.apk
+*.aab
+
+# Archivos de firma y claves privadas
+*.jks
+*.keystore
+**/key.properties
+
+# ==========================================
+# VISUAL STUDIO / .NET / C#
+# ==========================================
+
+
+**/.vs/
+*.user
+*.suo
+*.cache
+**/TestResults/
+**/artifacts/
+
+# Ignorar todas las carpetas bin
+**/bin/
+
+# Ignorar todas las carpetas obj
+**/obj/
+
+# ==========================================
+# VISUAL STUDIO CODE
+# ==========================================
+
+.vscode/
+
+# ==========================================
+# CONFIGURACIONES LOCALES Y SECRETOS
+# ==========================================
+
+**/appsettings.Development.json
+**/appsettings.Local.json
+**/secrets.json
+.env
+.env.*
+!.env.example
+
+# ==========================================
+# SQL SERVER Y BASES DE DATOS LOCALES
+# ==========================================
+
+*.mdf
+*.ldf
+*.bak
+*.trn
+*.db
+*.sqlite
+*.sqlite3
+
+# ==========================================
+# REGISTROS Y ARCHIVOS TEMPORALES
+# ==========================================
+
+*.log
+*.tmp
+*.temp
+
+# ==========================================
+# WINDOWS / MACOS
+# ==========================================
+
+Thumbs.db
+Desktop.ini
+.DS_Store

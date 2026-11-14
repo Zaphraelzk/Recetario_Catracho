@@ -1,0 +1,116 @@
+
+@baseUrl = http://localhost:5137
+@categoriaIdValida = 3
+@recetaIdTemporal = 14
+
+### 1. GET - Obtener todas las recetas
+GET {{baseUrl}}/api/recetas
+
+### 2. GET - Obtener una receta existente
+GET {{baseUrl}}/api/recetas/12
+
+### 3. GET - Buscar una receta por nombre
+GET {{baseUrl}}/api/recetas?search=yuca
+
+### 4. GET - Filtrar recetas por categoría
+GET {{baseUrl}}/api/recetas?categoriaId={{categoriaIdValida}}
+
+### 5. GET - Probar paginación
+GET {{baseUrl}}/api/recetas?page=1&pageSize=5
+
+### 6. GET - Probar búsqueda y paginación juntas
+GET {{baseUrl}}/api/recetas?search=yuca&page=1&pageSize=5
+
+### 7. GET - Probar página inválida (esperado: 400)
+GET {{baseUrl}}/api/recetas?page=0
+
+### 8. GET - Probar tamaño de página inválido (esperado: 400)
+GET {{baseUrl}}/api/recetas?pageSize=101
+
+### 9. GET - Receta inexistente (esperado: 404)
+GET {{baseUrl}}/api/recetas/9999
+
+### 10. POST - Crear receta temporal (esperado: 201)
+POST {{baseUrl}}/api/recetas
+Content-Type: application/json
+
+{
+  "nombre": "Receta temporal para pruebas API",
+  "descripcion": "Registro temporal para comprobar el funcionamiento del CRUD.",
+  "categoriaId": 3,
+  "dificultad": 2,
+  "tiempoPreparacionMin": 30,
+  "porciones": 2,
+  "ingredientes": "2 tomates, 1 cebolla y sal al gusto.",
+  "pasos": "1. Lavar los ingredientes. 2. Cortarlos. 3. Mezclarlos y servir."
+}
+
+### 11. POST - Validaciones incorrectas (esperado: 400)
+POST {{baseUrl}}/api/recetas
+Content-Type: application/json
+
+{
+  "nombre": "",
+  "descripcion": "",
+  "categoriaId": 0,
+  "dificultad": 2,
+  "tiempoPreparacionMin": 0,
+  "porciones": 0,
+  "ingredientes": "",
+  "pasos": ""
+}
+
+### 12. POST - Nombre duplicado (esperado: 409)
+POST {{baseUrl}}/api/recetas
+Content-Type: application/json
+
+{
+  "nombre": "Yuca con chicharrón",
+  "descripcion": "Prueba de nombre duplicado.",
+  "categoriaId": 3,
+  "dificultad": 2,
+  "tiempoPreparacionMin": 30,
+  "porciones": 2,
+  "ingredientes": "Yuca y chicharrón.",
+  "pasos": "Preparar y servir."
+}
+
+### 13. PUT - Actualizar receta temporal (esperado: 204)
+# Ejecutar solamente después del POST exitoso.
+# Sustituir 0 por el ID devuelto al crear la receta temporal.
+PUT {{baseUrl}}/api/recetas/{{recetaIdTemporal}}
+Content-Type: application/json
+
+{
+  "nombre": "Receta temporal actualizada",
+  "descripcion": "Registro temporal actualizado para probar el PUT.",
+  "categoriaId": 3,
+  "dificultad": 3,
+  "tiempoPreparacionMin": 45,
+  "porciones": 3,
+  "ingredientes": "3 tomates, 1 cebolla y sal.",
+  "pasos": "1. Lavar. 2. Cortar. 3. Cocinar. 4. Servir."
+}
+
+### 14. PUT - Actualizar receta inexistente (esperado: 404)
+PUT {{baseUrl}}/api/recetas/9999
+Content-Type: application/json
+
+{
+  "nombre": "Receta inexistente",
+  "descripcion": "Prueba de identificador inexistente.",
+  "categoriaId": 3,
+  "dificultad": 2,
+  "tiempoPreparacionMin": 30,
+  "porciones": 2,
+  "ingredientes": "Ingredientes de prueba.",
+  "pasos": "Pasos de prueba."
+}
+
+### 15. DELETE - Eliminar receta inexistente (esperado: 404)
+DELETE {{baseUrl}}/api/recetas/9999
+
+### 16. DELETE - Eliminar receta temporal (esperado: 204)
+# Ejecutar únicamente cuando hayas comprobado el POST y el PUT.
+# Verifica que recetaIdTemporal sea el ID de la receta temporal.
+DELETE {{baseUrl}}/api/recetas/{{recetaIdTemporal}}
